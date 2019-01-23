@@ -29,3 +29,6 @@ HOWTO
 - vagrant up
 - open browser eg. chrome/safari/ie
 - enter into browser http://localhost:8888/
+
+RESULT
+- Hello World
