@@ -1,0 +1,23 @@
+---
+  - name: Update Apt Cache
+    apt: update_cache=yes
+
+  - name: Install packages and dependencies
+    apt: name={{item}} state=present
+    with_items:
+       - apt-transport-https
+       - ca-certificates
+       - gnupg2
+       - software-properties-common
+       - curl
+       - elinks
+
+  - name: Download official GPG Key
+    get_url: url=https://download.docker.com/linux/ubuntu/gpg dest=/tmp/docker.gpg mode=0440
+
+  - name: Add Docker apt-key
+    apt_key: file=/tmp/docker.gpg state=present validate_certs=yes
+
+  - name: Configure APT Repository
+    apt_repository: repo="deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable" state=present validate_certs=yes
+

@@ -1,0 +1,15 @@
+---
+  - name: Install Docker
+    apt: name=docker-ce state=present
+
+  - name: Install PIP
+    apt: name=python-pip state=present
+
+  - name: Install Docker Compose
+    command: pip install docker-compose
+
+  - name: Build docker image
+    command: docker build -t rikesh-web .
+
+  - name: Run docker image
+    command: docker run -d -p 8080:80 rikesh-web
